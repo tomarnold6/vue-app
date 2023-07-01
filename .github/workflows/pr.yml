@@ -69,7 +69,7 @@ jobs:
           files: |
             *.html
             *.ico
-  release:
+  release: 
     needs: buildTestScan
     runs-on: ubuntu-latest
     steps:
