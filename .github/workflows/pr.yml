@@ -73,7 +73,8 @@ jobs:
       - name: Extract container location
         shell: bash
         run: |
-          pwd
+          "folder=pwd"
+          echo "$folder"
         id: extract_location
       - name: Extract branch name
         shell: bash
