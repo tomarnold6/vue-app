@@ -69,7 +69,7 @@ jobs:
         uses: actions/download-artifact@v3
         id: download
         with:
-          container: vue-test
+          name: vue-test
       - name: Extract branch name
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
@@ -77,7 +77,7 @@ jobs:
       - name: Create Release
         shell: bash
         run: |
-          for f in vue-test.zip; do FILES+=" -a $f"; done
+          for f in vue-test; do FILES+=" -a $f"; done
           hub release create ${{steps.extract_branch.outputs.branch}} -m ${{steps.extract_branch.outputs.branch}} $FILES
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
