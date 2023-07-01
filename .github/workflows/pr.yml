@@ -56,15 +56,16 @@ jobs:
           name: lcov-report
       - name: Generate release tag
         id: tag
-        run: |
-          echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
+        #run: |
+        #  echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       - name: Prerelease
         uses: "marvinpinto/action-automatic-releases@latest"
         with: 
           repo_token: "${{secrets.GITHUB_TOKEN}}"
           automatic_release_tag: "latest" #update with branch?
           prerelease: true
-          title: "Development Build"
+          title: "Development Build ${{steps.tag.outputs.branch}}"
           files: |
             dist/**
   release:  
