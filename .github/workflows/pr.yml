@@ -59,6 +59,16 @@ jobs:
         id: tag
         run: |
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
+      - name: Prerelease
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with: 
+          repo_token: "${{secrets.GITHUB_TOKEN}}"
+          automatic_release_tag: "latest" #update with branch?
+          prerelease: true
+          title: "Development Build"
+          files: |
+            *.html
+            *.ico
   release:
     needs: buildTestScan
     runs-on: ubuntu-latest
