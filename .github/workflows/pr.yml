@@ -57,7 +57,6 @@ jobs:
           name: lcov-report
       - name: GH Release
         uses: softprops/action-gh-release@v0.1.15
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
             dist/favicon.ico
