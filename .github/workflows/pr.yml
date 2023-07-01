@@ -72,7 +72,9 @@ jobs:
           name: vue-test
       - name: Extract container location
         shell: bash
-        run: echo "folder=find /home/runner -iname 'vue-test' -type d"
+        run: |
+          "folder=find /home/runner -iname 'vue-test' -type d"
+          echo "$folder"
         id: extract_location
       - name: Extract branch name
         shell: bash
