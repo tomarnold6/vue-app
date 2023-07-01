@@ -36,7 +36,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 20.1.0
           cache: npm
       - name: Install project dependencies
         run: npm ci
