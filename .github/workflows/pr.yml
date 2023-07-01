@@ -66,8 +66,7 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            dist/*/*
-            dist/*
+            dist/**
   release:  
     needs: buildTestScan
     runs-on: ubuntu-latest
