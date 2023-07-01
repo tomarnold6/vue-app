@@ -73,8 +73,8 @@ jobs:
       - name: Extract container location
         shell: bash
         run: |
-          "folder=find /home/runner/ -iname 'vue-test' -type d"
-          echo "$folder"
+
+          echo "pwd"
         id: extract_location
       - name: Extract branch name
         shell: bash
