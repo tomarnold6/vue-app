@@ -66,8 +66,8 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            *.html
-            *.ico
+            index.html
+            favicon.ico
   release: 
     needs: buildTestScan
     runs-on: ubuntu-latest
