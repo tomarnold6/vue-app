@@ -1,0 +1,65 @@
+---
+name: Run checks on PRs
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
+      - release
+permissions:
+  contents: read
+jobs:
+  lint:
+    name: Run linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install project dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+  buildTestScan:
+    name: Build, test, and run SonarCloud scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # Sonar Scanner requires full history for blame information
+          fetch-depth: 0
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.10.0
+          cache: npm
+      - name: Install project dependencies
+        run: npm ci
+      - name: Build the project
+        run: npm run build
+      - name: Test the project
+        run: npm run test:unit
+      - name: Preserve build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/
+          name: vue-test
+      - name: Preserve test coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          path: coverage/lcov-report/
+          name: lcov-report
+      - name: GH Release
+        uses: softprops/action-gh-release@v0.1.15
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/favicon.ico
+            dist/index.html
+        
