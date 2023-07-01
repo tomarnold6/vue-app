@@ -67,7 +67,7 @@ jobs:
           title: "Development Build"
           files: |
             dist/*
-  release: 
+  release:  
     needs: buildTestScan
     runs-on: ubuntu-latest
     steps:
