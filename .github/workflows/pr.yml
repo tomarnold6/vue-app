@@ -70,12 +70,6 @@ jobs:
         id: download
         with:
           name: vue-test
-      - name: Extract container location
-        shell: bash
-        run: |
-          "folder=pwd"
-          echo "$folder"
-        id: extract_location
       - name: Extract branch name
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
@@ -83,7 +77,7 @@ jobs:
       - name: Create Release
         shell: bash
         run: |
-          for f in ${{steps.extract_location.outputs.folder}}; do FILES+=" -a $f"; done
+          for f in pwd; do FILES+=" -a $f"; done
           hub release create ${{steps.extract_branch.outputs.branch}} -m ${{steps.extract_branch.outputs.branch}} $FILES
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
