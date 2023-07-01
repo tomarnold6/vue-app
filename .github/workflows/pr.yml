@@ -57,8 +57,7 @@ jobs:
       - name: GH Release
         uses: softprops/action-gh-release@v0.1.15
         with:
-          path: dist/
           files: |
-            favicon.ico
-            index.html
+            dist/favicon.ico
+            dist/index.html
         
