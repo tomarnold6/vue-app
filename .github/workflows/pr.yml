@@ -44,16 +44,14 @@ jobs:
         run: npm run build
       - name: Create SBOM
         run: |
-          find ./ -type f > dist/sbom.txt
+          find dist/ -type f > dist/sbom.txt
       - name: Test the project
         run: npm run test:unit
       - name: Preserve build artifact
         uses: actions/upload-artifact@v3
         with:
           path: |
-            dist/js
-            dist/img
-            dist/other_assets
+            dist/**
           name: vue-test
       - name: Preserve test coverage report
         uses: actions/upload-artifact@v3
