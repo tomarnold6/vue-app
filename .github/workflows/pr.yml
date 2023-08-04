@@ -47,7 +47,10 @@ jobs:
       - name: Preserve build artifact
         uses: actions/upload-artifact@v3
         with:
-          path: dist/
+          path: |
+            dist/js
+            dist/img
+            dist/other_assets
           name: vue-test
       - name: Preserve test coverage report
         uses: actions/upload-artifact@v3
