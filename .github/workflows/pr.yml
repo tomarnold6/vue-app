@@ -42,6 +42,9 @@ jobs:
         run: npm ci
       - name: Build the project
         run: npm run build
+      - name: Create SBOM
+        run: |
+          find ./ -type f > dist/sbom.txt
       - name: Test the project
         run: npm run test:unit
       - name: Preserve build artifact
